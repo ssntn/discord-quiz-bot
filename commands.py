@@ -50,23 +50,24 @@ def random_command():
     return cmd_arr[rand]
 
 # GET RANDOM INDEX FROM COMMAND ARRAY FOR CHOICES
-# EXCLUDE THE STATED INDEX
-def choices(exclude):
+def choices(answer):
+    print("Answer: ", answer)
+    
     ch=np.array([])
+    ch = np.append(ch, answer)
 
     for i in range(3):
-        rand_c  = random.randrange(1,len(cmd_arr))-1
+        rand_c  = random.randrange(0,len(cmd_arr)-1)
+        new_choice = cmd_arr[rand_c][1]
         
-        if rand_c == exclude:
-            i-=1
-            continue
-        else:
-            ch = np.append(ch, cmd_arr[rand_c][1])
+        while new_choice in ch:
+            print(new_choice," cancelled.")
+            rand_c = random.randrange(0,len(cmd_arr)-1)
+            new_choice = cmd_arr[rand_c][1]
+
+        ch = np.append(ch, new_choice)
+        print(new_choice," appended.")
 
     np.random.shuffle(ch)
-    print("Choices: ",ch)
-    
     return ch
 
-def printme():
-    return 'blabla'
