@@ -51,7 +51,9 @@ def random_command():
     return cmd_arr[rand]
 
 # GET RANDOM INDEX FROM COMMAND ARRAY FOR CHOICES
-def choices(answer):
+# BUTTON MODE: predef button, mode=0
+# NAME MODE: predef name, mode=1
+def choices(answer, mode):
     print("Answer: ", answer)
     
     ch=np.array([])
@@ -64,7 +66,10 @@ def choices(answer):
         while new_choice in ch:
             print(new_choice," cancelled.")
             rand_c = random.randrange(0,len(cmd_arr)-1)
-            new_choice = cmd_arr[rand_c][1]
+
+            new_choice = None
+            if mode == 0: new_choice = cmd_arr[rand_c][1]
+            elif mode == 1: new_choice = cmd_arr[0][rand_c]
 
         ch = np.append(ch, new_choice)
         print(new_choice," appended.")

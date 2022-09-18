@@ -1,6 +1,7 @@
-import disc
+import discord
 import os
 
+intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
 @client.event
@@ -14,5 +15,6 @@ async def on_message(message):
 
     if message.content.startswith("asd"):
         await message.channel.send("dsa")
+
 
 client.run(os.environ['TOKEN'])
