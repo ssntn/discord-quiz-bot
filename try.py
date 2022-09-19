@@ -1,20 +1,5 @@
-import discord
-import os
+import numpy as np
 
-intents = discord.Intents.all()
-client = discord.Client(intents=intents)
+ch=np.array([1,2,3])
 
-@client.event
-async def on_ready():
-    print("We have logged in asd {0.user}".format(client))
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith("asd"):
-        await message.channel.send("dsa")
-
-
-client.run(os.environ['TOKEN'])
+print(ch.size())

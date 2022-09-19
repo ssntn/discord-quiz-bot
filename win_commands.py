@@ -32,9 +32,9 @@ cmd_arr = np.array([
     np.array(["ctrl + up arrow", "scroll up"]),
     np.array(["ctrl + down arrow", "scroll down"]),
 
-    np.array(["windows", "open/close start"]),
-    np.array(["windows + d", "display/hide desktop"]),
-    np.array(["windows + tab", "switch virtual desktop"]),
+    np.array(["win", "open/close start"]),
+    np.array(["win + d", "display/hide desktop"]),
+    np.array(["win + tab", "switch virtual desktop"]),
 
     np.array(["alt + f4",  "close app"]),
     np.array(["alt + tab",  "switch app"]),
@@ -46,7 +46,6 @@ cmd_arr = np.array([
 
 # GET RANDOM INDEX FROM COMMAND ARRAY
 def random_command():
-    
     rand  = random.randrange(0,len(cmd_arr)-1)
     return cmd_arr[rand]
 
@@ -64,7 +63,6 @@ def choices(answer, mode):
         new_choice = cmd_arr[rand_c][1]
         
         while new_choice in ch:
-            print(new_choice," cancelled.")
             rand_c = random.randrange(0,len(cmd_arr)-1)
 
             new_choice = None
@@ -72,8 +70,24 @@ def choices(answer, mode):
             elif mode == 1: new_choice = cmd_arr[0][rand_c]
 
         ch = np.append(ch, new_choice)
-        print(new_choice," appended.")
+        
 
     np.random.shuffle(ch)
     return ch
 
+def quiz(mode):
+    rand_ind = random_command()
+    question = None
+    answer = None
+    
+    # BUTTON MODE: predef button, mode=0
+    if(mode == 0):
+        question = rand_ind[0]
+        answer = rand_ind[1]
+
+    # NAME MODE: predef name, mode=1
+    elif(mode == 1):
+        question = rand_ind[1]
+        answer = rand_ind[0]
+
+    return {"question":question, "choices": choices(answer, mode), "answer": answer }
