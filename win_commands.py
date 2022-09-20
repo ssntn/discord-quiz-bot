@@ -53,7 +53,6 @@ def random_command():
 # BUTTON MODE: predef button, mode=0
 # NAME MODE: predef name, mode=1
 def choices(answer, mode):
-    print("Answer: ", answer)
     
     ch=np.array([])
     ch = np.append(ch, answer)

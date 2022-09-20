@@ -34,15 +34,26 @@ async def on_message(message):
 		answer = quiz["answer"]
 
 		choice_str = ""
-		print(choices.size)
 		for i in range(choices.size):
 			choice_str = choice_str+ str(i+1) +": "+choices[i]+"\n"
 
 		msg = await message.channel.send(f"\nWhich command: {question}\n{choice_str}\nAnswer: {answer}")
-		
+
 		emojis = ["1️⃣","2️⃣","3️⃣", "4️⃣"]
 		for e in emojis:
 			await msg.add_reaction(e)
+
+@client.event
+async def on_reaction_add(reaction, user):
+	if user == client.user:
+		return
+
+	emojis = ["1️⃣","2️⃣","3️⃣", "4️⃣"]
+	if reaction.emoji not in emojis:
+		await reaction.remove(user)
+		await reaction.message.channel.send("Don't add new reactions!!")
+	else:
+		await reaction.message.channel.send(f"{user} reacted: {reaction.emoji}")
 
 
  # DELETE THIS LINE # DELETE THIS LINE # DELETE THIS LINE # DELETE THIS LINE
